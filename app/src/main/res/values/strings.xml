@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Manager</string>
+
+
+    <string name="Message_Welcome">Bienvenido</string>
+    <string name="Message_Login_Text">Ingresa tus credenciales</string>
+    <string name="InsertPass">Enter your password</string>
+    <string name="InsertUser">Enter your user</string>
+    <string name="Switch">Mostrar contraseña</string>
+    <string name="StartLogin">Login</string>
+    <string name="TxtResetPass">Restablecer contraseña</string>
+
+
+    <string name="Message_Options">Este es tu menú de opciones</string>
+    <string name="BtnSalesReport">Reporte De Ventas</string>
+    <string name="BtnInventoryReport">Reporte De Inventario</string>
+    <string name="BtnProductReport">Inventario por producto</string>
+    <string name="BtnAddProduct">Registrar producto</string>
+    <string name="ImageLogin">Esta es una imagen de un usuario para hacer login.</string>
+
+
+    <string name="TxtBoxNombreProductoView">Nombre del producto: </string>
+    <string name="TxtBoxDescripcionProducto">Descripción: </string>
+    <string name="TxtBoxStock">Stock: </string>
+
+    <string name="TxtAlgo">Example</string>
+    <string name="TxtSell">Realizar Venta</string>
+    <string name="TxtInventoryReport">Reporte de inventario</string>
+    <string name="TxtSalesReport">Reporte de ventas</string>
+    <string name="TxtProductReport">Reporte de producto</string>
+    <string name="TxtRegisterProduct">Registrar Producto</string>
+    <string name="TxtMyAccount">Mi cuenta</string>
+    <string name="TxtConfiguration">Configuración</string>
+
+
+    <string name="BtnScan">Escanear</string>
+    <string name="BtnBuscar">Buscar</string>
+    <string name="TxtSProducto">Nombre: </string>
+    <string name="TxtSDescripcion">Descripción: </string>
+    <string name="TxtSPrecio">Precio: </string>
+    <string name="TxtSStock">Stock: </string>
+
+    <string name="BtnRegistrar">Registrar</string>
+</resources>
