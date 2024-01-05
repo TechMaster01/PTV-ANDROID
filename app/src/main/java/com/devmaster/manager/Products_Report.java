@@ -2,8 +2,10 @@ package com.devmaster.manager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -12,6 +14,8 @@ import android.widget.Toast;
 import com.devmaster.manager.MODELS.PRODUCTOS;
 import com.devmaster.manager.NETWORK.APIClient;
 import com.devmaster.manager.NETWORK.APIProductos;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.util.List;
 
@@ -27,6 +31,7 @@ public class Products_Report extends AppCompatActivity {
     TextView Precio_Producto;
     TextView Descripcion_Producto;
     TextView Stock_Producto;
+    Button BtnScan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +47,40 @@ public class Products_Report extends AppCompatActivity {
         Precio_Producto = findViewById(R.id.TxtPrecio);
         Stock_Producto = findViewById(R.id.TxtStock);
         EdtBarcode = findViewById(R.id.EdtCodigo);
+        BtnScan = findViewById(R.id.BtnScan);
 
         //BuscarProducto.setOnClickListener(v -> Imprimir(""));
 
         BuscarProducto.setOnClickListener(v -> ObtenerDatosProducto(EdtBarcode.getText().toString()));
+
+        BtnScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                IntentIntegrator Scanner = new IntentIntegrator(Products_Report.this);
+                Scanner.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
+                Scanner.setPrompt("Lector - CDP");
+                Scanner.setCameraId(0);
+                Scanner.setBarcodeImageEnabled(true);
+                Scanner.initiateScan();
+            }
+        });
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+
+        if (result != null){
+            if (result.getContents() == null){
+                Toast.makeText(this, "Lectura Cancelada", Toast.LENGTH_LONG).show();
+
+            } else {
+                Toast.makeText(this, result.getContents(), Toast.LENGTH_SHORT).show();
+                EdtBarcode.setText(result.getContents());
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     public void Imprimir(String codigo){

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -11,6 +12,8 @@ import android.widget.Toast;
 import com.devmaster.manager.NETWORK.APIClient;
 import com.devmaster.manager.NETWORK.APIProductos;
 import com.devmaster.manager.NETWORK.Respuesta;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,6 +27,7 @@ public class Register_Product extends AppCompatActivity {
     EditText EdtStock;
     EditText EdtPrecio;
     EditText EdtProveedor;
+    Button BtnScan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +41,40 @@ public class Register_Product extends AppCompatActivity {
         EdtPrecio = findViewById(R.id.EdtPrecioProducto);
         EdtProveedor = findViewById(R.id.EdtIdProveedor);
 
+        BtnScan = findViewById(R.id.BtnScan);
+
         Button RegistrarProducto = findViewById(R.id.BtnRegistrar);
 
         RegistrarProducto.setOnClickListener(v -> RegistrarNuevoProducto());
+
+        BtnScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                IntentIntegrator Scanner = new IntentIntegrator(Register_Product.this);
+                Scanner.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
+                Scanner.setPrompt("Lector - CDP");
+                Scanner.setCameraId(0);
+                Scanner.setBarcodeImageEnabled(true);
+                Scanner.initiateScan();
+            }
+        });
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+
+        if (result != null){
+            if (result.getContents() == null){
+                Toast.makeText(this, "Lectura Cancelada", Toast.LENGTH_LONG).show();
+
+            } else {
+                Toast.makeText(this, result.getContents(), Toast.LENGTH_SHORT).show();
+                EdtBarcode.setText(result.getContents());
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     private void RegistrarNuevoProducto(){
