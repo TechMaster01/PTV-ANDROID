@@ -22,7 +22,7 @@ public interface APIProductos {
     @POST("productos")
     Call<Respuesta> RegistrarProducto(
             @Field("ID_PRODUCTO") String ID_PRODUCTO,
-            @Field("NOMBRE_PRODUCTO") String NOMBRE_PROCDUTO,
+            @Field("NOMBRE_PRODUCTO") String NOMBRE_PRODUCTO,
             @Field("DESCRIPCION") String DESCRIPCION,
             @Field("STOCK") String STOCK,
             @Field("PRECIO") String PRECIO,
