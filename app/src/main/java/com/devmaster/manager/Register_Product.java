@@ -74,10 +74,11 @@ public class Register_Product extends AppCompatActivity {
                 showToast("Error de conexion");
             }
         });
-
     }
 
     private void showToast(final String Texto) {
         Toast.makeText(Register_Product.this, Texto, Toast.LENGTH_SHORT).show();
     }
+
+    //Prueba Git
 }
